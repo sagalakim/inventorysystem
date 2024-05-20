@@ -1,0 +1,50 @@
+Inventory System Database (ERD)
+
+ITEMS
+-ID
+-Item name
+-Item type
+-Unit
+-Description
+-Quantity
+-Balance
+
+Stockins
+-ID
+-Item ID
+-PO number
+-Date  of PO
+-Stock No(Modify)
+-Type(supply/equipment)
+-Unit
+-Description
+-Quantity
+-Unit cost
+-Status/remarks
+-Balance after receipt
+
+Stockouts
+-ID
+-Item ID
+-PO number
+-Date  of PO
+-Stock No(Modify)
+-Type(supply/equipment)
+-Unit
+-Description
+-Quantity
+-Unit cost
+-Status/remarks
+-Received by
+-No. of units received by employee
+-Date received
+
+Purchase_Requests
+-ID
+-Requested_item_name
+-Requested_item_type
+-Unit
+-Description
+-Quantity
+-Balance
+-Status
