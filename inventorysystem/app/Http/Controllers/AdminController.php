@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Stockin;
+use App\Models\Stockout;
+
 
 class AdminController extends Controller
 {
@@ -16,6 +19,58 @@ class AdminController extends Controller
             'item_description' => $request->description,
             'quantity' => $request->quantity,
             'balance' => $request->quantity,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function stockin(Request $request){
+
+        $item = Item::findOrFail($request->item);
+
+        $item->quantity += $request->quantity;
+        $item->balance += $request->quantity;
+        $item->save();
+
+        Stockin::create([
+            'item_id' => $request->item,
+            'po_number' => $request->ponumber,
+            'po_date'=> $request->podate,
+            'stock_no'=> $request->stockno,
+            'type'=> $request->type,
+            'unit'=> $request->unit,
+            'description'=> $request->description,
+            'quantity'=> $request->quantity,
+            'unit_cost'=> $request->unitcost,
+            'status_remarks'=> $request->statusremarks,
+            'balance_after_receipt' => $item->balance,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function stockout(Request $request){
+
+        $item = Item::findOrFail($request->item);
+
+        $item->quantity -= $request->quantity;
+        $item->balance -= $request->quantity;
+        $item->save();
+
+        Stockout::create([
+            'item_id' => $request->item,
+            'po_number' => $request->ponumber,
+            'po_date'=> $request->podate,
+            'stock_no'=> $request->stockno,
+            'type'=> $request->type,
+            'unit'=> $request->unit,
+            'description'=> $request->description,
+            'quantity'=> $request->quantity,
+            'unit_cost'=> $request->unitcost,
+            'status_remarks'=> $request->statusremarks,
+            'received_by' => $request->receivedby,
+            'no_of_units_received' => $request->unitsreceived,
+            'date_received' => $request->datereceived,
         ]);
 
         return redirect()->back();

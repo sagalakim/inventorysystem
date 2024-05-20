@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form method='Post' action="{{route('stockin')}}" enctype="multipart/form-data">
+    <form method='Post' action="{{route('stockout')}}" enctype="multipart/form-data">
         <h2>Stock ins</h2>
         @csrf
         <div class="form-row">
@@ -75,6 +75,24 @@
             <div class="form-group col-md-6">
             <label for="inputCity">Status/Remarks</label>
             <input type="text" class="form-control" name='statusremarks' id="inputCity" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="inputCity">Received by</label>
+            <input type="text" class="form-control" name='receivedby' id="inputCity" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="inputCity">No of units received</label>
+            <input type="number" class="form-control" name='unitsreceived' id="inputCity" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="inputCity">Date Received</label>
+            <input type="date" class="form-control" name='datereceived' id="inputCity" required>
             </div>
         </div>
         <div class="form-group">

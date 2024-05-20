@@ -28,10 +28,17 @@ Route::get('/dashboard', function () {
 Route::get('/stockin', function () {
     $items = Item::all();
     return view('stockin', compact('items'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('stockinv');
+
+Route::get('/stockout', function () {
+    $items = Item::all();
+    return view('stockout', compact('items'));
+})->middleware(['auth', 'verified'])->name('stockoutv');
 
 Route::middleware('auth')->group(function () {
     Route::post('/item-store', [AdminController::class, 'itemstore'])->name('store.item');
+    Route::post('/stock-in', [AdminController::class, 'stockin'])->name('stockin');
+    Route::post('/stock-out', [AdminController::class, 'stockout'])->name('stockout');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
