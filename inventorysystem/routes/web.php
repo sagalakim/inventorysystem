@@ -35,10 +35,17 @@ Route::get('/stockout', function () {
     return view('stockout', compact('items'));
 })->middleware(['auth', 'verified'])->name('stockoutv');
 
+Route::get('/purchase-request', function () {
+    $items = Item::all();
+    return view('purchaserequest', compact('items'));
+})->middleware(['auth', 'verified'])->name('purchaser');
+
 Route::middleware('auth')->group(function () {
     Route::post('/item-store', [AdminController::class, 'itemstore'])->name('store.item');
     Route::post('/stock-in', [AdminController::class, 'stockin'])->name('stockin');
     Route::post('/stock-out', [AdminController::class, 'stockout'])->name('stockout');
+    Route::post('/store-purchase-request', [AdminController::class, 'purchaserequest'])->name('purchaserequest');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

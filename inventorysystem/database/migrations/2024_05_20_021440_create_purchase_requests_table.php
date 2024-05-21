@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('purchase_requests', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('item_id')->nullable();
+            $table->foreign('item_id')->references('id')->on('items')->onUpdate('cascade')->onDelete('cascade');
             $table->string('requested_item_name');
             $table->string('requested_item_type');
             $table->string('unit');
@@ -22,6 +24,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('balance');
             $table->string('status');
+            $table->string('remarks');
             $table->timestamps();
         });
     }

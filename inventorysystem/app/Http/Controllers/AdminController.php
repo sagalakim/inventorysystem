@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Stockin;
 use App\Models\Stockout;
+use App\Models\PurchaseRequest;
 
 
 class AdminController extends Controller
@@ -71,6 +72,24 @@ class AdminController extends Controller
             'received_by' => $request->receivedby,
             'no_of_units_received' => $request->unitsreceived,
             'date_received' => $request->datereceived,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function purchaserequest(Request $request){
+        $item = Item::findOrFail($request->item);
+
+        PurchaseRequest::create([
+            'item_id' => $item->id,
+            'requested_item_name' => $item->item_name,
+            'requested_item_type' => $item->item_type,
+            'unit' => $item->unit,
+            'item_description' => $request->description,
+            'quantity' => $request->quantity,
+            'balance' => $request->quantity,
+            'status' => 'Pending',
+            'remarks' => 'None',
         ]);
 
         return redirect()->back();

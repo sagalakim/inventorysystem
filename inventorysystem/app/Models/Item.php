@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PurchaseRequest;
 
 class Item extends Model
 {
@@ -17,4 +18,9 @@ class Item extends Model
         'quantity',
         'balance',
     ];
+
+    public function pr()
+    {
+        return $this->belongsTo(PurchaseRequest::class, 'id', 'item_id');
+    }
 }
