@@ -11,7 +11,9 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'item_name',
+        'po_number',
+        'po_date',
+        'stock_no',
         'item_type',
         'unit',
         'item_description',

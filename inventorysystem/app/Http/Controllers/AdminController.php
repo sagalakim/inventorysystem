@@ -13,16 +13,23 @@ class AdminController extends Controller
 {
     public function itemstore(Request $request){
 
-        Item::create([
-            'item_name' => $request->item_name,
-            'item_type'=> $request->item_type,
-            'unit' => $request->unit,
-            'item_description' => $request->description,
-            'quantity' => $request->quantity,
-            'balance' => $request->quantity,
-        ]);
+        if($request->ajax()){
 
-        return redirect()->back();
+            $unitcost = $request->unitcost;
+            $remarks = $request->remarks;
+            Item::create([
+                'po_number' => $request->ponumber,
+                'po_date'=> $request->podate,
+                'stock_no'=> $request->stockno,
+                'item_type'=> $request->item_type,
+                'unit' => $request->unit,
+                'item_description' => $request->description,
+                'quantity' => $request->quantity,
+                'balance' => $request->quantity,
+            ]);
+
+            return response()->json(['success' => true]);
+        }
     }
 
     public function stockin(Request $request){

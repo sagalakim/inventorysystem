@@ -22,13 +22,29 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $items = Item::orderBy('unit', 'asc')->get();
+    return view('admin.inventorycontent',compact('items'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/stockin', function () {
-    $items = Item::all();
-    return view('stockin', compact('items'));
+Route::get('/supplies', function () {
+    return view('admin.supplies');
+})->middleware(['auth', 'verified'])->name('suppl');
+
+Route::get('/equipment', function () {
+    return view('admin.equipment');
+})->middleware(['auth', 'verified'])->name('equip');
+
+Route::get('/Admin/StockIn', function () {
+    //$items = Item::all();
+    //return view('stockin', compact('items'));
+    return view('admin.inout.stockIn');
 })->middleware(['auth', 'verified'])->name('stockinv');
+
+Route::get('/Admin/StockOut', function () {
+    //$items = Item::all();
+    //return view('stockin', compact('items'));
+    return view('admin.inout.stockOut');
+})->middleware(['auth', 'verified'])->name('stockov');
 
 Route::get('/stockout', function () {
     $items = Item::all();
@@ -41,7 +57,7 @@ Route::get('/purchase-request', function () {
 })->middleware(['auth', 'verified'])->name('purchaser');
 
 Route::get('/items', function () {
-    $items = Item::all();
+    $items = Item::all()->orderBy('unit', 'asc');
     return view('items', compact('items'));
 })->middleware(['auth', 'verified'])->name('items');
 

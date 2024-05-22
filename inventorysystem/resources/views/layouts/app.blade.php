@@ -50,6 +50,18 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+        $('#exampleModal2').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var item = button.data('item');
+            $('#item-select').empty();
+            $.each(item, function(key, value) {
+            $('#item-select').append('<option value="' + value.id + '">' + value.item_name + '</option>');
+            });
+        });
+        });
+    </script>
 
     </body>
 </html>

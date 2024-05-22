@@ -1,3 +1,4 @@
+@include('prequest')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -14,6 +15,10 @@
             </div>
         </div>
     </div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2"  data-item="{{$items}}">
+    Stockin
+</button>
 
     <form method='Post' action="{{route('purchaserequest')}}" enctype="multipart/form-data">
         <h2>Purchase Request</h2>
