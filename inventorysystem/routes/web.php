@@ -40,6 +40,11 @@ Route::get('/purchase-request', function () {
     return view('purchaserequest', compact('items'));
 })->middleware(['auth', 'verified'])->name('purchaser');
 
+Route::get('/items', function () {
+    $items = Item::all();
+    return view('items', compact('items'));
+})->middleware(['auth', 'verified'])->name('items');
+
 Route::middleware('auth')->group(function () {
     Route::post('/item-store', [AdminController::class, 'itemstore'])->name('store.item');
     Route::post('/stock-in', [AdminController::class, 'stockin'])->name('stockin');
