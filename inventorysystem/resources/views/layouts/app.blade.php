@@ -45,8 +45,8 @@
         $(document).ready(function() {
             $('#exampleModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
-                var itemId = button.data('id');
-                $('#item-id').text('Item ID: ' + itemId);
+                var item = button.data('item');
+                $('#item-id').text('Item ID: ' + item.id + ' Name: ' + item.item_name + ' Quantity: ' + item.quantity);
             });
         });
     </script>

@@ -30,7 +30,7 @@
       <th scope="row">{{$item->id}}</th>
       <td>{{$item->item_name}}</td>
       <td>{{$item->item_description}}</td>
-      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id="{{$item->id}}">
+      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id="{{$item->id}}" data-item="{{$item}}">
     Stockin
 </button></td>
     </tr>
