@@ -13,9 +13,7 @@
           <h4>Equipment</h4>
           
           <button type="button" class="btn btn-primary btn-sm align-self-end text-end search-button">Print</button>
-        </div>
-        <h6>Date</h6>
-        
+        </div>        
         
        
       <div class="mb-1 d-flex justify-content-between align-items-between">
@@ -42,25 +40,33 @@
     </tr>
   </thead>
   <tbody>
+  @if($items->count() > 0 )
+    @foreach($items as $item)
     <tr>
-      <th scope="row">PC</th>
-      <td>Ballpen</td>
-      <td>20</td>
+      <th scope="row">{{$item->unit}}</th>
+      <td>{{$item->item_description}}</td>
+      <td>{{$item->quantity}}</td>
       <td class = "text-center">
 
-      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#detailsmodal">
+      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#detailsmodal" data-unit='{{$item}}'>
         <i class="fa-solid fa-circle-info custom-icon text-warning"></i>
     Details</a>
-      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockinmodal">
+      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockinmodal" data-set='{{$item}}'>
         <i class="fas fa-layer-group custom-icon text-success"></i>
     Stock In</a>
 
-      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockoutmodal">
+      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockoutmodal" data-list='{{$item}}'>
           <i class="fa fa-send custom-icon text-danger"></i>
     Stock Out</a>
       
       </td>
     </tr>
+    @endforeach
+    @else
+    <tr>
+      <th class = "text-center" colspan="4">No Items Added</th>
+    </tr>
+    @endif
     
   </tbody>
 </table>

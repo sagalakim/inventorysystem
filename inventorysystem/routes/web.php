@@ -27,11 +27,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/supplies', function () {
-    return view('admin.supplies');
+    $items = Item::where('item_type', '=', 'Supply')->orderBy('item_description', 'asc')->get();
+    return view('admin.supplies', compact('items'));
 })->middleware(['auth', 'verified'])->name('suppl');
 
 Route::get('/equipment', function () {
-    return view('admin.equipment');
+    $items = Item::where('item_type', '=', 'Equipment')->orderBy('item_description', 'asc')->get();
+    return view('admin.equipment', compact('items'));
 })->middleware(['auth', 'verified'])->name('equip');
 
 Route::get('/Admin/StockIn', function () {

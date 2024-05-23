@@ -61,10 +61,12 @@ class AdminController extends Controller
 
     public function stockout(Request $request){
 
+        if($request->ajax()){
+
         $item = Item::findOrFail($request->item);
 
-        $item->quantity -= $request->quantity;
-        $item->balance -= $request->quantity;
+        $item->quantity -= $request->nounits;
+        $item->balance -= $request->nounits;
         $item->save();
 
         Stockout::create([
@@ -77,13 +79,13 @@ class AdminController extends Controller
             'description'=> $request->description,
             'quantity'=> $request->quantity,
             'unit_cost'=> $request->unitcost,
-            'status_remarks'=> $request->statusremarks,
+            'status_remarks'=> $request->remarks,
             'received_by' => $request->receivedby,
-            'no_of_units_received' => $request->unitsreceived,
-            'date_received' => $request->datereceived,
+            'no_of_units_received' => $request->nounits,
+            'date_received' => $request->dategiven,
         ]);
-
-        return redirect()->back();
+        return response()->json(['success' => true]);
+    }
     }
 
     public function purchaserequest(Request $request){

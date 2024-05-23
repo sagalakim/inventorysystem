@@ -488,6 +488,37 @@
 
 </script>
 
+<script> 
+        
+        $(document).ready(function() {
+    $('#agentstockoutsubmitForm').on('click', function(e) {
+      e.preventDefault(); // Prevent the form from submitting normally
+
+      // Collect the form data
+      var formData = $('#agentstockoutForm').serialize();
+
+      // Submit the form data to the server using an AJAX request
+      $.ajax({
+        url: "{{route('stockout')}}",
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+          console.log('Form submitted successfully');
+          $('#agentstockoutForm')[0].reset();
+          $('#stockoutmodal').modal('hide');
+          location.reload();
+          
+        },
+        error: function(xhr, status, error) {
+            var errorObj = JSON.parse(xhr.responseText);
+            alert(errorObj.error);
+        }
+      });
+    });
+ });
+
+</script>
+
 <script>
     $(document).ready(function() {
         $('#detailsmodal').on('show.bs.modal', function(event) {
@@ -514,6 +545,24 @@
             document.getElementById('type1').setAttribute('value', item.item_type);
             document.getElementById('unit1').setAttribute('value', item.unit);
             document.getElementById('description1').setAttribute('value', item.item_description);
+  
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#stockoutmodal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var item = button.data('list');
+            document.getElementById('itemid2').setAttribute('value', item.id);
+            document.getElementById('quantity2').setAttribute('value', item.quantity);
+            document.getElementById('ponumber2').setAttribute('value', item.po_number);
+            document.getElementById('podate2').setAttribute('value', item.po_date);
+            document.getElementById('stockno2').setAttribute('value', item.stock_no);
+            document.getElementById('description2').setAttribute('value', item.item_description);
+            document.getElementById('type2').setAttribute('value', item.item_type);
+            document.getElementById('unit2').setAttribute('value', item.unit);
   
         });
     });
