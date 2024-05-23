@@ -457,6 +457,37 @@
 
 </script>
 
+<script> 
+        
+        $(document).ready(function() {
+    $('#agentstocksubmitForm').on('click', function(e) {
+      e.preventDefault(); // Prevent the form from submitting normally
+
+      // Collect the form data
+      var formData = $('#agentstockinForm').serialize();
+
+      // Submit the form data to the server using an AJAX request
+      $.ajax({
+        url: "{{route('stockin')}}",
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+          console.log('Form submitted successfully');
+          $('#agentstockinForm')[0].reset();
+          $('#stockinmodal').modal('hide');
+          location.reload();
+          
+        },
+        error: function(xhr, status, error) {
+            var errorObj = JSON.parse(xhr.responseText);
+            alert(errorObj.error);
+        }
+      });
+    });
+ });
+
+</script>
+
 <script>
     $(document).ready(function() {
         $('#detailsmodal').on('show.bs.modal', function(event) {
@@ -465,10 +496,24 @@
             $('#ponumber').text(item.po_number);
             $('#podate').text(item.po_date);
             $('#stockno').text(item.stock_no);
-            $('#type').text(item.type);
+            $('#type').text(item.item_type);
             $('#unit').text(item.unit);
             $('#description').text(item.item_description);
             $('#quantity').text(item.quantity);
+  
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#stockinmodal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var item = button.data('set');
+            document.getElementById('itemid').setAttribute('value', item.id);
+            document.getElementById('type1').setAttribute('value', item.item_type);
+            document.getElementById('unit1').setAttribute('value', item.unit);
+            document.getElementById('description1').setAttribute('value', item.item_description);
   
         });
     });

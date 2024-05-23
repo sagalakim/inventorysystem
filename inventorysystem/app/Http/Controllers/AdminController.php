@@ -34,6 +34,7 @@ class AdminController extends Controller
 
     public function stockin(Request $request){
 
+        if($request->ajax()){
         $item = Item::findOrFail($request->item);
 
         $item->quantity += $request->quantity;
@@ -54,7 +55,8 @@ class AdminController extends Controller
             'balance_after_receipt' => $item->balance,
         ]);
 
-        return redirect()->back();
+        return response()->json(['success' => true]);
+    }
     }
 
     public function stockout(Request $request){

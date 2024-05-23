@@ -57,7 +57,7 @@ Route::get('/purchase-request', function () {
 })->middleware(['auth', 'verified'])->name('purchaser');
 
 Route::get('/items', function () {
-    $items = Item::all()->orderBy('unit', 'asc');
+    $items = Item::orderBy('unit', 'asc')->get();
     return view('items', compact('items'));
 })->middleware(['auth', 'verified'])->name('items');
 

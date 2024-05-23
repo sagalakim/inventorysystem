@@ -134,7 +134,7 @@
       <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#detailsmodal"  data-unit='{{$item}}'>
         <i class="fa-solid fa-circle-info custom-icon text-warning"></i>
     Details</a>
-      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockinmodal">
+      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockinmodal" data-set='{{$item}}'>
         <i class="fas fa-layer-group custom-icon text-success"></i>
     Stock In</a>
 
