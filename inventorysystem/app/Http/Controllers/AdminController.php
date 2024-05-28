@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Stockin;
 use App\Models\Stockout;
 use App\Models\PurchaseRequest;
+use PDF;
 
 
 class AdminController extends Controller
@@ -104,5 +105,52 @@ class AdminController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function searchstockin(Request $request){
+        $stockins = Stockin::where('description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.inout.stockIn',compact('stockins'));
+
+    }
+
+    public function searchstockout(Request $request){
+        $stockouts = Stockout::where('description', 'like', '%'. $request->search. '%')->orWhere('received_by', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.inout.stockOut',compact('stockouts'));
+
+    }
+
+    public function searchitem(Request $request){
+        $items = Item::where('item_description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.inventorycontent',compact('items'));
+
+    }
+
+    public function searchitemsupplies(Request $request){
+        $items = Item::where('item_type', '=', 'Supply')->where('item_description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.supplies',compact('items'));
+
+    }
+    public function searchitemequipments(Request $request){
+        $items = Item::where('item_type', '=', 'Equipment')->where('item_description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.equipment',compact('items'));
+
+    }
+    public function downloadpdf(){
+        set_time_limit(300);
+    
+        $stockouts = Stockout::all();
+        $items = Item::orderBy('item_description', 'asc')->get();
+        $stockins = Stockin::orderBy('po_date', 'desc')->get();
+
+    
+            $info = [
+                'stockouts' => $stockouts,
+                'items' => $items,
+                'stockins' => $stockins,
+            ];
+    
+            $pdf = Pdf::loadView('admin.print', $info);
+            $pdf->setPaper('Legal', 'Portrait');
+            return $pdf->download('Inventory-test.pdf');
     }
 }

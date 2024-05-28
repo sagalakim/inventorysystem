@@ -247,6 +247,10 @@
     padding: 10px;
   }
 
+  .locked {
+      pointer-events: none;
+  }
+
   .people{
     background-color: #Ffffff;
   }

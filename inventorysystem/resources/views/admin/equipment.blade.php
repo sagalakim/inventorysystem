@@ -17,8 +17,8 @@
         
        
       <div class="mb-1 d-flex justify-content-between align-items-between">
-          <form action="search.php" method="get" class="search-form">
-            <input type="text" name="query" class="search-input" placeholder="Search item...">
+          <form action="{{route('searchitemequipments')}}" action='Get' enctype="multipart/form-data" class="search-form">
+            <input type="text" name="search" class="search-input" placeholder="Search item...">
             <button type="submit" class="search-button">Search</button>
         </form>
           

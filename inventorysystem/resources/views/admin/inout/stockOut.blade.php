@@ -14,37 +14,34 @@
             Filter
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/stockOutSupplies" id="Supplies">Supplies</a>
-            <a class="dropdown-item" href="/stockOutEquipment" id="Equipment">Equipment</a>
+            <a class="dropdown-item" href="/Admin/StockOut/Supplies" id="Supplies">Supplies</a>
+            <a class="dropdown-item" href="/Admin/StockOut/Equipment" id="Equipment">Equipment</a>
           </div>
         </div>
         <!--end dropdown-->
         </div>
        
         <!--date 4 2day-->
-        <div class="col-md-12">
-          <div class="con d-flex col-md-12"> 
-            <h4>May 17, 2024</h4>
-            </div>       
-        </div>
 
         <!--search bar -->
-        <div class="col-md-4" style="padding: 20px">
-        <div class="input-group rounded">
-        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-        <span class="input-group-text border-0" id="search-addon">
-            <i class="fas fa-search"></i>
-        </span>
-        </div>
-        </div>
+        <form action="{{route('search2')}}" action='Get' enctype="multipart/form-data">
+          <div class="col-md-4" style="padding: 20px">
+          <div class="input-group rounded">
+          <input name=search type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+          <button type='submit' id='stockinsearch' class="input-group-text border-0" id="search-addon">
+              <i class="fas fa-search"></i>
+          </button>
+          </div>
+          </div>
+        </form>
             <!--search bar-->
 
         <!--table-->
         <div class="col-12 col-md-12 d-flex">
-                <div class="card col-md-12" >
+                <div class="card col-md-12" style="overflow-y:scroll;max-height:400px" >
                 <div class="card-body ">
         <table class="table ">
-        <thead class="thead-dark">
+        <thead class="thead-dark" style='font-size:12px;'>
             <tr>
             <th class='text-center' style='align-items:center;vertical-align:middle' scope="col">PO Number</th>
             <th class='text-center' style='align-items:center;vertical-align:middle' scope="col">Date of PO</th>
@@ -60,35 +57,29 @@
             <th class='text-center' style='align-items:center;vertical-align:middle' scope="col">Date received by employee</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style='font-size:12px;'>
+        @if($stockouts->count() > 0)
+            @foreach($stockouts as $stockout)
             <tr>
-            <th class='text-center' style='align-items:center;' scope="row">2024-03-191</th>
-            <td class='text-center' style='align-items:center;'>18-Mar-2024</td>
-            <td class='text-center' style='align-items:center;'>n/a</td>
-            <td class='text-center' style='align-items:center;'>Supply</td>
-            <td class='text-center' style='align-items:center;'>pc</td>
-            <td class='text-center' style='align-items:center;'>Tarpaulin 5x8ft</td>
-            <td class='text-center' style='align-items:center;'>2</td>
-            <td class='text-center' style='align-items:center;'>600</td>
-            <td class='text-center' style='align-items:center;'></td>
-            <td class='text-center' style='align-items:center;'>A. Boriongan</td>
-            <td class='text-center' style='align-items:center;'>2</td>
-            <td></td>
+            <th class='text-center' style='align-items:center;' scope="row">{{$stockout->po_number}}</th>
+            <td class='text-center' style='align-items:center; width:100px;'>{{$stockout->po_date}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->stock_no}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->type}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->unit}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->description}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->quantity}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->unit_cost}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->status_remarks}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->received_by}}</td>
+            <td class='text-center' style='align-items:center;'>{{$stockout->no_of_units_received}}</td>
+            <td>{{$stockout->date_received}}</td>
             </tr>
-            <tr>
-            <th class='text-center' style='align-items:center;' scope="row">2024-03-191</th>
-            <td class='text-center' style='align-items:center;'>18-Mar-2024</td>
-            <td class='text-center' style='align-items:center;' >for issuance of sticker</td>
-            <td class='text-center' style='align-items:center;'>Equipment</td>
-            <td class='text-center' style='align-items:center;'>unit</td>
-            <td class='text-center' style='align-items:center;'>Steel Cabinet 2 Layers  </td>
-            <td class='text-center' style='align-items:center;'>1</td>
-            <td class='text-center' style='align-items:center;'>8000</td>
-            <td class='text-center' style='align-items:center;'></td>
-            <td class='text-center' style='align-items:center;'>A. Boriongan</td>
-            <td class='text-center' style='align-items:center;'>2</td>
-            <td class='text-center' style='align-items:center;'></td>
-            </tr>
+            @endforeach
+          @else
+          <tr>
+            <th class = "text-center" colspan="12">No Items Added</th>
+          </tr>
+          @endif
         </tbody>
         </table>
         </div>

@@ -4,6 +4,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Item;
+use App\Models\Stockin;
+use App\Models\Stockout;
+
+
 
 
 /*
@@ -18,7 +22,7 @@ use App\Models\Item;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 Route::get('/dashboard', function () {
@@ -37,16 +41,40 @@ Route::get('/equipment', function () {
 })->middleware(['auth', 'verified'])->name('equip');
 
 Route::get('/Admin/StockIn', function () {
-    //$items = Item::all();
+    $stockins = Stockin::orderBy('po_date', 'desc')->get();
     //return view('stockin', compact('items'));
-    return view('admin.inout.stockIn');
+    return view('admin.inout.stockIn',compact('stockins'));
 })->middleware(['auth', 'verified'])->name('stockinv');
 
-Route::get('/Admin/StockOut', function () {
-    //$items = Item::all();
+Route::get('/Admin/StockIn/Supplies', function () {
+    $stockins = Stockin::where('type','Supply')->orderBy('po_date', 'desc')->get();
     //return view('stockin', compact('items'));
-    return view('admin.inout.stockOut');
+    return view('admin.inout.stockIn',compact('stockins'));
+})->middleware(['auth', 'verified'])->name('stockins');
+
+Route::get('/Admin/StockIn/Equipment', function () {
+    $stockins = Stockin::where('type','Equipment')->orderBy('po_date', 'desc')->get();
+    //return view('stockin', compact('items'));
+    return view('admin.inout.stockIn',compact('stockins'));
+})->middleware(['auth', 'verified'])->name('stockine');
+
+Route::get('/Admin/StockOut', function () {
+    $stockouts = Stockout::orderBy('po_date', 'desc')->get();
+    //return view('stockin', compact('items'));
+    return view('admin.inout.stockOut', compact('stockouts'));
 })->middleware(['auth', 'verified'])->name('stockov');
+
+Route::get('/Admin/StockOut/Supplies', function () {
+    $stockouts = Stockout::where('type','Supply')->orderBy('po_date', 'desc')->get();
+    //return view('stockin', compact('items'));
+    return view('admin.inout.stockOut',compact('stockouts'));
+})->middleware(['auth', 'verified'])->name('stockouts');
+
+Route::get('/Admin/StockOut/Equipment', function () {
+    $stockouts = Stockout::where('type','Equipment')->orderBy('po_date', 'desc')->get();
+    //return view('stockin', compact('items'));
+    return view('admin.inout.stockOut',compact('stockouts'));
+})->middleware(['auth', 'verified'])->name('stockouts');
 
 Route::get('/stockout', function () {
     $items = Item::all();
@@ -68,7 +96,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/stock-in', [AdminController::class, 'stockin'])->name('stockin');
     Route::post('/stock-out', [AdminController::class, 'stockout'])->name('stockout');
     Route::post('/store-purchase-request', [AdminController::class, 'purchaserequest'])->name('purchaserequest');
+    Route::post('/print-all', [AdminController::class, 'downloadpdf'])->name('download');
 
+    Route::get('/item-search-supplies', [AdminController::class, 'searchitemsupplies'])->name('searchitemsupply');
+    Route::get('/item-search-equipments', [AdminController::class, 'searchitemequipments'])->name('searchitemequipments');
+    Route::get('/item-search', [AdminController::class, 'searchitem'])->name('searchitem');
+    Route::get('/stockin-search', [AdminController::class, 'searchstockin'])->name('search');
+    Route::get('/stockout-search', [AdminController::class, 'searchstockout'])->name('search2');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -12,8 +12,10 @@
       <div class="container-fluid">
         <div class="mb-1 mr-4 d-flex justify-content-between align-items">
           <h4>Admin Dashboard</h4>
-          
-          <button type="button" class="btn btn-primary btn-sm align-self-end text-end search-button">Print</button>
+          <form action="{{route('download')}}" method="Post" enctype="multipart/form-data">
+            @csrf
+            <button type="submit" class="btn btn-primary btn-sm align-self-end text-end search-button">Print</button>
+          </form>
         </div>        
         
         <div class="col-md-12">
@@ -33,7 +35,7 @@
                               </div>
                             </div>
                             <div class="col-6 align-self-end text-end">
-                              <img src="{{asset('image/4207.jpg')}}" class="img-fluid illustration-img" alt="">
+                              <img src="{{asset('images/supplies.png')}}" class="img-fluid illustration-img" alt="">
                             </div>
                           </div>
                         </div>
@@ -90,7 +92,7 @@
                     </div>
                   </div>
                   <div class="col-6 align-self-end text-end" >
-                    <img src="{{asset('image/group.png')}}" class="img-fluid illustration-img" alt="">
+                    <img src="{{asset('images/equipment.png')}}" class="img-fluid illustration-img" alt="">
                   </div>
                 </div>
               </div>
@@ -100,12 +102,12 @@
         <!--for non org bar graph-->
     
       <div class="mb-1 d-flex justify-content-between align-items">
-          <form action="search.php" method="get" class="search-form">
-            <input type="text" name="query" class="search-input" placeholder="Search item...">
+          <form action="{{route('searchitem')}}" method="get" class="search-form">
+            <input type="text" name="search" class="search-input" placeholder="Search item...">
             <button type="submit" class="search-button">
             <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-        </form>
+          </form>
           
           <button type="button" class="btn btn-primary btn-sm align-self-end text-end search-button" data-toggle="modal" data-target="#additemsmodal">+ add Items</button>
         </div>
