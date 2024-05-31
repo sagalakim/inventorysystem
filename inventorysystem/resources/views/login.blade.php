@@ -28,25 +28,26 @@
                 <h6 class="mb-0 text-white" style="font-size: 14px;">Misamis Oriental Field Office</h6>
             </div>
         </div>
-            <div class="my-auto">
+            <div class="my-auto  d-flex row justify-content-center align-items-center">
               <!-- title-->
               <h4 class="text-white text-2xl font-semibold mb-2">Log In</h4>
               <p class="text-gray-100 mb-9">Enter your email address and password to access account.</p>
 
               <!-- form -->
-              <form action="#">
+              <form method="POST" action="{{ route('login') }}" style='color:white;'>
+                @csrf
                 <div class="mb-4">
                   <label for="emailaddress" class="block text-base/normal font-semibold text-gray-200 mb-2">Email address</label>
-                  <input class="block w-full rounded py-1.5 px-3 bg-transparent border-white/10 text-white/80 focus:border-white/25 focus:outline-0 focus:ring-0" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                  <input class="block w-full rounded py-1.5 px-3 bg-transparent border-white/10 text-white/100 focus:border-white/25 focus:outline-0 focus:ring-0 " type="email" id="emailaddress" required="" name='email' :value="old('email')" placeholder="Enter your email">
                 </div>
                 <!-- end email input -->
                 <div class="mb-4">
                   <label for="password" class="block text-base/normal font-semibold text-gray-200 mb-2">Password</label>
-                  <input class="block w-full rounded py-1.5 px-3 bg-transparent border-white/10 text-white/80 focus:border-white/25 focus:outline-0 focus:ring-0" type="password" required="" id="password" placeholder="Enter your password">
+                  <input class="block w-full rounded py-1.5 px-3 bg-transparent border-white/10 text-white/80 focus:border-white/25 focus:outline-0 focus:ring-0" type="password" required="" name='password' id="password" placeholder="Enter your password">
                 </div>
                 
                 <div class="mb-6 text-center">
-                  <a href="#" class="w-full inline-flex items-center justify-center px-6 py-2 backdrop-blur-2xl bg-white/20 text-white rounded-lg transition-all duration-500 group hover:bg-blue-600/60 hover:text-white mt-5" type="submit">Log In </a>
+                  <button class="w-full inline-flex items-center justify-center px-6 py-2 backdrop-blur-2xl bg-white/20 text-white rounded-lg transition-all duration-500 group hover:bg-blue-600/60 hover:text-white mt-5" type="submit">Log In </button>
                 </div>
                 <!-- social-->
                 
