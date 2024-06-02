@@ -18,6 +18,8 @@ class Item extends Model
         'unit',
         'item_description',
         'quantity',
+        'unit_cost',
+        'status_remarks',
         'balance',
     ];
 

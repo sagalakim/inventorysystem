@@ -534,6 +534,10 @@
             $('#unit').text(item.unit);
             $('#description').text(item.item_description);
             $('#quantity').text(item.quantity);
+            $('#unitcost').text(item.unit_cost);
+            $('#remarks').text(item.status_remarks);
+            $('#balance').text(item.balance);
+
   
         });
     });

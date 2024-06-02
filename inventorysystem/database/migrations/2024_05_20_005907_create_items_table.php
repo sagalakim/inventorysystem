@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('unit');
             $table->string('item_description');
             $table->integer('quantity');
+            $table->integer('unit_cost');
+            $table->string('status_remarks');
             $table->integer('balance');
             $table->timestamps();
         });

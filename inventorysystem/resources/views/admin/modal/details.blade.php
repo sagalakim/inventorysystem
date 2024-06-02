@@ -36,9 +36,9 @@
       <th id='unit'></th>
       <td id='description'></td>
       <td id='quantity'></td>
-      <td id='unitcost'>WALA PA</td>
-      <td id='remarks'>WALA PA</td>
-      <td id='balance'>WALA PA</td>
+      <td id='unitcost'></td>
+      <td id='remarks'></td>
+      <td id='balance'></td>
     </tr>
     
   </tbody>

@@ -26,6 +26,8 @@ class AdminController extends Controller
                 'unit' => $request->unit,
                 'item_description' => $request->description,
                 'quantity' => $request->quantity,
+                'unit_cost' => $unitcost,
+                'status_remarks' => $remarks,
                 'balance' => $request->quantity,
             ]);
 
@@ -66,7 +68,6 @@ class AdminController extends Controller
 
         $item = Item::findOrFail($request->item);
 
-        $item->quantity -= $request->nounits;
         $item->balance -= $request->nounits;
         $item->save();
 
@@ -113,9 +114,33 @@ class AdminController extends Controller
 
     }
 
+    public function searchstockinSupply(Request $request){
+        $stockins = Stockin::where('type', '=', 'Supply')->where('description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.inout.stockInSupply',compact('stockins'));
+
+    }
+
+    public function searchstockinEquipment(Request $request){
+        $stockins = Stockin::where('type', '=', 'Equipment')->where('description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.inout.stockInEquipment',compact('stockins'));
+
+    }
+
     public function searchstockout(Request $request){
         $stockouts = Stockout::where('description', 'like', '%'. $request->search. '%')->orWhere('received_by', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
         return view('admin.inout.stockOut',compact('stockouts'));
+
+    }
+
+    public function searchstockoutSupply(Request $request){
+        $stockouts = Stockout::where('type', '=', 'Equipment')->orWhere('description', 'like', '%'. $request->search. '%')->orWhere('received_by', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.inout.stockOutSupply',compact('stockouts'));
+
+    }
+
+    public function searchstockoutEquipment(Request $request){
+        $stockouts = Stockout::where('type', '=', 'Equipment')->orWhere('description', 'like', '%'. $request->search. '%')->orWhere('received_by', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        return view('admin.inout.stockOutEquipment',compact('stockouts'));
 
     }
 

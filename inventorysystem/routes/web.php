@@ -47,15 +47,13 @@ Route::get('/Admin/StockIn', function () {
 })->middleware(['auth', 'verified'])->name('stockinv');
 
 Route::get('/Admin/StockIn/Supplies', function () {
-    $stockins = Stockin::where('type','Supply')->orderBy('po_date', 'desc')->get();
-    //return view('stockin', compact('items'));
-    return view('admin.inout.stockIn',compact('stockins'));
+    $stockins = Stockin::where('type','Supply')->orderBy('description', 'asc')->get();
+    return view('admin.inout.stockInSupply',compact('stockins'));
 })->middleware(['auth', 'verified'])->name('stockins');
 
 Route::get('/Admin/StockIn/Equipment', function () {
-    $stockins = Stockin::where('type','Equipment')->orderBy('po_date', 'desc')->get();
-    //return view('stockin', compact('items'));
-    return view('admin.inout.stockIn',compact('stockins'));
+    $stockins = Stockin::where('type','Equipment')->orderBy('description', 'asc')->get();
+    return view('admin.inout.stockInEquipment',compact('stockins'));
 })->middleware(['auth', 'verified'])->name('stockine');
 
 Route::get('/Admin/StockOut', function () {
@@ -66,14 +64,12 @@ Route::get('/Admin/StockOut', function () {
 
 Route::get('/Admin/StockOut/Supplies', function () {
     $stockouts = Stockout::where('type','Supply')->orderBy('po_date', 'desc')->get();
-    //return view('stockin', compact('items'));
-    return view('admin.inout.stockOut',compact('stockouts'));
+    return view('admin.inout.stockOutSupply',compact('stockouts'));
 })->middleware(['auth', 'verified'])->name('stockouts');
 
 Route::get('/Admin/StockOut/Equipment', function () {
     $stockouts = Stockout::where('type','Equipment')->orderBy('po_date', 'desc')->get();
-    //return view('stockin', compact('items'));
-    return view('admin.inout.stockOut',compact('stockouts'));
+    return view('admin.inout.stockOutEquipment',compact('stockouts'));
 })->middleware(['auth', 'verified'])->name('stockouts');
 
 Route::get('/stockout', function () {
@@ -102,7 +98,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/item-search-equipments', [AdminController::class, 'searchitemequipments'])->name('searchitemequipments');
     Route::get('/item-search', [AdminController::class, 'searchitem'])->name('searchitem');
     Route::get('/stockin-search', [AdminController::class, 'searchstockin'])->name('search');
+    Route::get('/stockin-search-supply', [AdminController::class, 'searchstockinSupply'])->name('searchsupp');
+    Route::get('/stockin-search-equipment', [AdminController::class, 'searchstockinEquipment'])->name('searchequip');
     Route::get('/stockout-search', [AdminController::class, 'searchstockout'])->name('search2');
+    Route::get('/stockout-search-supply', [AdminController::class, 'searchstockoutSupply'])->name('search2supp');
+    Route::get('/stockout-search-equipment', [AdminController::class, 'searchstockoutEquipment'])->name('search2equip');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
