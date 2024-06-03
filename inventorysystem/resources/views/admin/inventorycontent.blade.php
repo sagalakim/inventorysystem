@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="mb-1 mr-4 d-flex justify-content-between align-items">
           <h4>Admin Dashboard</h4>
-          <form action="{{route('download')}}" method="Post" enctype="multipart/form-data">
+          <form action="{{route('download')}}" method="Post" target="_blank" enctype="multipart/form-data">
             @csrf
             <button type="submit" class="btn btn-primary btn-sm align-self-end text-end search-button">Print</button>
           </form>

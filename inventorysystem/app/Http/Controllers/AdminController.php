@@ -38,33 +38,63 @@ class AdminController extends Controller
     public function stockin(Request $request){
 
         if($request->ajax()){
+        // Add validation rules for each field
+        $request->validate([
+        'item' => 'required',
+        'ponumber' => 'required',
+        'podate' => 'required',
+        'stockno' => 'required',
+        'type' => 'required',
+        'unit' => 'required',
+        'description' => 'required',
+        'quantity' => 'required|numeric',
+        'unitcost' => 'required|numeric',
+        'statusremarks' => 'required',
+        ]);
+        
         $item = Item::findOrFail($request->item);
-
+        
         $item->quantity += $request->quantity;
         $item->balance += $request->quantity;
         $item->save();
-
+        
         Stockin::create([
-            'item_id' => $request->item,
-            'po_number' => $request->ponumber,
-            'po_date'=> $request->podate,
-            'stock_no'=> $request->stockno,
-            'type'=> $request->type,
-            'unit'=> $request->unit,
-            'description'=> $request->description,
-            'quantity'=> $request->quantity,
-            'unit_cost'=> $request->unitcost,
-            'status_remarks'=> $request->statusremarks,
-            'balance_after_receipt' => $item->balance,
+        'item_id' => $request->item,
+        'po_number' => $request->ponumber,
+        'po_date'=> $request->podate,
+        'stock_no'=> $request->stockno,
+        'type'=> $request->type,
+        'unit'=> $request->unit,
+        'description'=> $request->description,
+        'quantity'=> $request->quantity,
+        'unit_cost'=> $request->unitcost,
+        'status_remarks'=> $request->statusremarks,
+        'balance_after_receipt' => $item->balance,
         ]);
-
+        
         return response()->json(['success' => true]);
-    }
-    }
+        }
+        }
 
     public function stockout(Request $request){
 
         if($request->ajax()){
+
+        $request->validate([
+            'item' => 'required',
+            'ponumber' => 'required',
+            'podate' => 'required',
+            'stockno' => 'required',
+            'type' => 'required',
+            'unit' => 'required',
+            'description' => 'required',
+            'quantity' => 'required|numeric',
+            'unitcost' => 'required|numeric',
+            'remarks' => 'required',
+            'receivedby' => 'required',
+            'nounits' => 'required',
+            'dategiven' => 'required',
+        ]);
 
         $item = Item::findOrFail($request->item);
 
