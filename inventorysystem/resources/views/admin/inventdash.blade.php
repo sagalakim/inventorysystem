@@ -494,6 +494,37 @@
 <script> 
         
         $(document).ready(function() {
+    $('#agentstocksubmitForme').on('click', function(e) {
+      e.preventDefault(); // Prevent the form from submitting normally
+
+      // Collect the form data
+      var formData = $('#agentstockinForme').serialize();
+
+      // Submit the form data to the server using an AJAX request
+      $.ajax({
+        url: "{{route('stockin')}}",
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+          console.log('Form submitted successfully');
+          $('#agentstockinForme')[0].reset();
+          $('#stockinmodale').modal('hide');
+          location.reload();
+          
+        },
+        error: function(xhr, status, error) {
+            var errorObj = JSON.parse(xhr.responseText);
+            alert(errorObj.error);
+        }
+      });
+    });
+ });
+
+</script>
+
+<script> 
+        
+        $(document).ready(function() {
     $('#agentstockoutsubmitForm').on('click', function(e) {
       e.preventDefault(); // Prevent the form from submitting normally
 
@@ -527,9 +558,9 @@
         $('#detailsmodal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var item = button.data('unit');
-            $('#ponumber').text(item.po_number);
-            $('#podate').text(item.po_date);
-            $('#stockno').text(item.stock_no);
+            $('#ponumber').text(item.par_ics);
+            $('#podate').text(item.stock_no);
+            $('#stockno').text(item.date_acquired);
             $('#type').text(item.item_type);
             $('#unit').text(item.unit);
             $('#description').text(item.item_description);
@@ -545,6 +576,23 @@
 
 <script>
     $(document).ready(function() {
+        $('#edetailsmodal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var item = button.data('unit');
+            $('#ponumbere').text(item.par_ics);
+            $('#podatee').text(item.stock_no);
+            $('#stocknoe').text(item.date_acquired);
+            $('#typee').text(item.unit_cost);
+            $('#unite').text(item.item_description);
+            $('#descriptione').text(item.status_remarks);
+            $('#quantitye').text(item.custodian_name);
+  
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
         $('#stockinmodal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var item = button.data('set');
@@ -552,6 +600,21 @@
             document.getElementById('type1').setAttribute('value', item.item_type);
             document.getElementById('unit1').setAttribute('value', item.unit);
             document.getElementById('description1').setAttribute('value', item.item_description);
+  
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#stockinmodale').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var item = button.data('set');
+            document.getElementById('itemide').setAttribute('value', item.id);
+            document.getElementById('estockno').setAttribute('value', item.stock_no);
+            document.getElementById('type1e').setAttribute('value', item.item_type);
+            document.getElementById('unit1e').setAttribute('value', item.unit);
+            document.getElementById('description1e').setAttribute('value', item.item_description);
   
         });
     });

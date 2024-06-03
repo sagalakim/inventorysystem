@@ -11,8 +11,8 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'po_number',
-        'po_date',
+        'par_ics',
+        'date_acquired',
         'stock_no',
         'item_type',
         'unit',
@@ -20,6 +20,7 @@ class Item extends Model
         'quantity',
         'unit_cost',
         'status_remarks',
+        'custodian_name',
         'balance',
     ];
 

@@ -1,8 +1,10 @@
 @extends('admin.inventdash')
 @include('admin.modal.details')
 @include('admin.modal.stockin')
+@include('admin.modal.stockinEquipment')
 @include('admin.modal.stockout')
 @include('admin.modal.additems')
+@include('admin.modal.equipmentdetails')
 @section('content')
 
 
@@ -45,13 +47,13 @@
     <tr>
       <th scope="row">{{$item->unit}}</th>
       <td>{{$item->item_description}}</td>
-      <td>{{$item->quantity}}</td>
+      <td>{{$item->balance}}</td>
       <td class = "text-center">
 
-      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#detailsmodal" data-unit='{{$item}}'>
+      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#edetailsmodal" data-unit='{{$item}}'>
         <i class="fa-solid fa-circle-info custom-icon text-warning"></i>
     Details</a>
-      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockinmodal" data-set='{{$item}}'>
+      <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockinmodale" data-set='{{$item}}'>
         <i class="fas fa-layer-group custom-icon text-success"></i>
     Stock In</a>
 

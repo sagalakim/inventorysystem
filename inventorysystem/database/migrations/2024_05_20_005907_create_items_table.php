@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('po_number');
-            $table->date('po_date');
+            $table->string('par_ics');
+            $table->date('date_acquired');
             $table->string('stock_no');
             $table->string('item_type');
             $table->string('unit');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('unit_cost');
             $table->string('status_remarks');
+            $table->string('custodian_name');
             $table->integer('balance');
             $table->timestamps();
         });

@@ -12,36 +12,40 @@
         </button>
       </div>
       <div class="modal-body d-flex justify-content-center">
-<form id="agentitemForm" action="{{route('store.item')}}" action='Post' enctype="multipart/form-data" class="w-full max-w-lg">
+<form id="agentitemForm" action="{{route('store.item')}}" method='Post' enctype="multipart/form-data" class="w-full max-w-lg">
   @csrf
   <div class="flex flex-wrap -mx-3">
     <div class="w-full md:w-1/2 px-3  md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-        PO Number
+        PAR / ICS No.
       </label>
-      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="2024-03-141" name='ponumber' required>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="2024-03-141" name='par' required>
     </div>
-    <div class="w-full md:w-1/2 px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-        Date of PO
+    <div class="w-full md:w-1/2 px-3  md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Property No. / Inventory No.
       </label>
-      <input type='date' class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" name="podate" placeholder="Fill in"required>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="2024-03-141" name='stockno' required>
+    </div>
+    <div class="w-full md:w-1/0 px-3" style='margin-bottom:20px;'>
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+        Date Acquired
+      </label>
+      <input type='date' class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" name="dateacquired" placeholder="Fill in"required>
     </div>
   </div>
   
   <div class="flex flex-wrap -mx-3">
-    <div class="w-full md:w-1/2 px-3  md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-      Stock No./Property No./ICS No.
-      </label>
-      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" name="stockno" placeholder="N/A"required>
-    </div>
-    <div class="w-full md:w-1/2 px-3">
+    <div class="w-full md:w-1/0 px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
         Type
       </label>
-      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" name="item_type" type="text" placeholder="Supply/Equipment"required>
-    </div>
+      <select name='type' class="form-control form-select-lg mb-3" style='background-color:#efeff5; font-size:20px;' aria-label=".form-select-lg example">
+        <option selected>-- Select --</option>
+        <option value="Supply">Supply</option>
+        <option value="Equipment">Equipment</option>
+      </select>
+      </div>
   </div>
 
     <div class="flex flex-wrap -mx-3">
@@ -77,6 +81,12 @@
         Remarks
       </label>
       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" name='remarks' type="text"  placeholder="Fill in"required>
+    </div>
+    <div class="w-full md:w-1/0 px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+        New Custodian Name
+      </label>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" name='custname' type="text"  placeholder="Fill in"required>
     </div>
   </div>
 </form>

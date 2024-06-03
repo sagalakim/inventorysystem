@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Stockin;
 use App\Models\Stockout;
 use App\Models\PurchaseRequest;
+use Carbon\Carbon;
 use PDF;
 
 
@@ -16,22 +17,43 @@ class AdminController extends Controller
 
         if($request->ajax()){
 
-            $unitcost = $request->unitcost;
-            $remarks = $request->remarks;
-            Item::create([
-                'po_number' => $request->ponumber,
-                'po_date'=> $request->podate,
-                'stock_no'=> $request->stockno,
-                'item_type'=> $request->item_type,
-                'unit' => $request->unit,
-                'item_description' => $request->description,
-                'quantity' => $request->quantity,
-                'unit_cost' => $unitcost,
-                'status_remarks' => $remarks,
-                'balance' => $request->quantity,
-            ]);
+            if($request->type == 'Equipment'){
+                $unitcost = $request->unitcost;
+                $remarks = $request->remarks;
+                Item::create([
+                    'par_ics' => $request->par,
+                    'date_acquired' => $request->dateacquired,
+                    'stock_no'=> $request->stockno,
+                    'item_type'=> $request->type,
+                    'unit' => $request->unit,
+                    'item_description' => $request->description,
+                    'quantity' => $request->quantity,
+                    'unit_cost' => $unitcost,
+                    'status_remarks' => $remarks,
+                    'custodian_name' => $request->custname,
+                    'balance' => $request->quantity,
+                ]);
 
-            return response()->json(['success' => true]);
+                return response()->json(['success' => true]);
+            }else{
+                $unitcost = $request->unitcost;
+                $remarks = $request->remarks;
+                Item::create([
+                    'par_ics' => $request->par ?? '',
+                    'date_acquired' => $request->dateacquired ??Carbon::now(),
+                    'stock_no'=> $request->stockno,
+                    'item_type'=> $request->type,
+                    'unit' => $request->unit,
+                    'item_description' => $request->description,
+                    'quantity' => $request->quantity,
+                    'unit_cost' => $unitcost,
+                    'status_remarks' => $remarks,
+                    'custodian_name' => '',
+                    'balance' => $request->quantity,
+                ]);
+
+                return response()->json(['success' => true]);
+            }
         }
     }
 
@@ -82,8 +104,6 @@ class AdminController extends Controller
 
         $request->validate([
             'item' => 'required',
-            'ponumber' => 'required',
-            'podate' => 'required',
             'stockno' => 'required',
             'type' => 'required',
             'unit' => 'required',
@@ -103,8 +123,8 @@ class AdminController extends Controller
 
         Stockout::create([
             'item_id' => $request->item,
-            'po_number' => $request->ponumber,
-            'po_date'=> $request->podate,
+            'po_number' => '',
+            'po_date'=> Carbon::now(),
             'stock_no'=> $request->stockno,
             'type'=> $request->type,
             'unit'=> $request->unit,
@@ -175,18 +195,18 @@ class AdminController extends Controller
     }
 
     public function searchitem(Request $request){
-        $items = Item::where('item_description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        $items = Item::where('item_type', '=', 'Supply')->where('item_description', 'like', '%'. $request->search. '%')->orderBy('item_description', 'asc')->get();
         return view('admin.inventorycontent',compact('items'));
 
     }
 
     public function searchitemsupplies(Request $request){
-        $items = Item::where('item_type', '=', 'Supply')->where('item_description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        $items = Item::where('item_type', '=', 'Supply')->where('item_description', 'like', '%'. $request->search. '%')->orderBy('item_description', 'asc')->get();
         return view('admin.supplies',compact('items'));
 
     }
     public function searchitemequipments(Request $request){
-        $items = Item::where('item_type', '=', 'Equipment')->where('item_description', 'like', '%'. $request->search. '%')->orderBy('po_date', 'desc')->get();
+        $items = Item::where('item_type', '=', 'Equipment')->where('item_description', 'like', '%'. $request->search. '%')->orderBy('item_description', 'asc')->get();
         return view('admin.equipment',compact('items'));
 
     }

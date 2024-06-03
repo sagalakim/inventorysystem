@@ -87,8 +87,6 @@
             <table id="example" class="table table-bordered" style="margin-left:-125px; margin-top:-30px; border:1px solid black">
         <thead style='font-size:12px; background-color:#000066;color:white;'>
         <tr>
-        <th scope="col" class='align-items-center' style='vertical-align:middle;width:15% '>PO Number</th>
-        <th scope="col" style='vertical-align:middle;width:10% '>Date of PO</th>
         <th scope="col" style='vertical-align:middle;width:50px'>Stock/Property No./ICS No.</th>
         <th scope="col" style='vertical-align:middle '>Type</th>
         <th scope="col" style='vertical-align:middle '>Unit</th>
@@ -103,16 +101,14 @@
         @if($items->count() > 0)
             @foreach($items as $item)
             <tr>
-            <th id='ponumber'>{{$item->po_number}}</th>
-            <td id='podate'>{{$item->po_date}}</td>
             <td id='stockno'>{{$item->stock_no}}</td>
             <td id='type'>{{$item->item_type}}</td>
             <th id='unit'>{{$item->unit}}</th>
-            <td id='description'>{{$item->item_description}}></td>
+            <td id='description' style='width:180px;'>{{$item->item_description}}></td>
             <td id='quantity'>{{$item->quantity}}</td>
-            <td id='unitcost'>WALA PA</td>
-            <td id='remarks'>WALA PA</td>
-            <td id='balance'>WALA PA</td>
+            <td id='unitcost'>{{$item->unit_cost}}</td>
+            <td id='remarks'>{{$item->status_remarks}}</td>
+            <td id='balance'>{{$item->balance}}</td>
             </tr>
             @endforeach
           @else

@@ -61,8 +61,8 @@
         @if($stockouts->count() > 0)
             @foreach($stockouts as $stockout)
             <tr>
-            <th class='text-center' style='align-items:center;' scope="row">{{$stockout->po_number}}</th>
-            <td class='text-center' style='align-items:center; width:100px;'>{{$stockout->po_date}}</td>
+            <th class='text-center' style='align-items:center;' scope="row">N/A</th>
+            <td class='text-center' style='align-items:center; width:100px;'>N/A</td>
             <td class='text-center' style='align-items:center;'>{{$stockout->stock_no}}</td>
             <td class='text-center' style='align-items:center;'>{{$stockout->type}}</td>
             <td class='text-center' style='align-items:center;'>{{$stockout->unit}}</td>

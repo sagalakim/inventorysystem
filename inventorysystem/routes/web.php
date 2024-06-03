@@ -26,7 +26,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $items = Item::orderBy('unit', 'asc')->get();
+    $items = Item::where('item_type', '=', 'Supply')->orderBy('unit', 'asc')->get();
     return view('admin.inventorycontent',compact('items'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 

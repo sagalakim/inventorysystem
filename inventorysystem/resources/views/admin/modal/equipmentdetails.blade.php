@@ -2,7 +2,7 @@
 
 
 <!-- Details Modal -->
-<div class="modal fade bd-example-modal-lg " id="detailsmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg " id="edetailsmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-wide" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,29 +16,23 @@
   <thead class="thead-dark" style='font-size:12px' >
     <tr>
       <th scope="col" class='align-items-center' style='vertical-align:middle;width:15% '>PAR / ICS No.</th>
-      <th scope="col" style='vertical-align:middle;width:50px'>Property No./ Inventory No.</th>
+      <th scope="col" style='vertical-align:middle;width:50px'>Property No. / Inventory No.</th>
       <th scope="col" style='vertical-align:middle;width:10% '>Date Acquired</th>
-      <th scope="col" style='vertical-align:middle '>Type</th>
-      <th scope="col" style='vertical-align:middle '>Unit</th>
-      <th scope="col" style='vertical-align:middle '>Description (as reflected in the PO)</th>
-      <th scope="col" style='vertical-align:middle '>Quantity</th>
       <th scope="col" style='vertical-align:middle '>Unit Cost</th>
+      <th scope="col" style='vertical-align:middle '>Description (as reflected in the PO)</th>
       <th scope="col" style='vertical-align:middle '>Remarks</th>
-      <th scope="col" style='vertical-align:middle; width:8%; '>Balance after receipt</th>
+      <th scope="col" style='vertical-align:middle; width:8%; '>New Custodian (Name)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id='ponumber'></th>
-      <td id='podate'></td>
-      <td id='stockno'></td>
-      <td id='type'></td>
-      <th id='unit'></th>
-      <td id='description'></td>
-      <td id='quantity'></td>
-      <td id='unitcost'></td>
-      <td id='remarks'></td>
-      <td id='balance'></td>
+      <th id='ponumbere'></th>
+      <td id='podatee' style='width:100px;'></td>
+      <td id='stocknoe'></td>
+      <td id='typee'></td>
+      <th id='unite'></th>
+      <td id='descriptione'></td>
+      <td id='quantitye'></td>
     </tr>
     
   </tbody>
