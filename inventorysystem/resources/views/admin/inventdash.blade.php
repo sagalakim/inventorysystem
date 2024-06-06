@@ -317,9 +317,10 @@
     <aside id="sidebar">
     <!--content sidebar-->
     <div class="h-100">
-      <div class="sidebar-logo">
-      <img src="{{asset('images/DOLE_picture.png')}}" alt="Logo" width="30" height="24" class="ml-3 d-inline-block align-text-top">
-        <a href="#" style="font-size:20px; vertical-align:middle; margin-left:10px;">DOLE</a>
+    <div class="sidebar-logo text-center">
+      <img src="{{asset('images/DOLE_picture.png')}}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        <a href="#" style="font-size:20px; vertical-align:middle;" class = "text-center">DOLE 
+        <p style="font-size:10px; vertical-align:middle;" >Misamis Oriental Provincial Field Office</p></a>
       </div>
       <ul class="sidebar-nav">
         <li class="sidebar-header">
