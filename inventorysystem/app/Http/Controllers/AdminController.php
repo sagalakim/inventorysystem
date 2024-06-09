@@ -57,6 +57,46 @@ class AdminController extends Controller
         }
     }
 
+    public function itemedit(Request $request){
+
+        if($request->ajax()){
+
+            $item = Item::findOrFail($request->item);
+            
+            if($item->quantity == $request->quantity){
+                $item->par_ics = $request->par;
+                $item->date_acquired = $request->dateacquired;
+                $item->stock_no = $request->stockno;
+                $item->item_type = $request->type;
+                $item->unit = $request->unit;
+                $item->item_description = $request->description;
+                $item->quantity = $request->quantity;
+                $item->unit_cost = $request->unitcost;
+                $item->status_remarks = $request->remarks;
+                $item->custodian_name = $request->custname ?? '';
+
+                $item->save();
+            }
+            else{
+                $item->par_ics = $request->par;
+                $item->date_acquired = $request->dateacquired;
+                $item->stock_no = $request->stockno;
+                $item->item_type = $request->type;
+                $item->unit = $request->unit;
+                $item->item_description = $request->description;
+                $item->quantity = $request->quantity;
+                $item->balance = $request->quantity;
+                $item->unit_cost = $request->unitcost;
+                $item->status_remarks = $request->remarks;
+                $item->custodian_name = $request->custname ?? '';
+    
+                $item->save();
+            }
+
+            return response()->json(['success' => true]);
+        }
+    }
+
     public function stockin(Request $request){
 
         if($request->ajax()){

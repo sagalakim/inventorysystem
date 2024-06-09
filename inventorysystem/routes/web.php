@@ -89,6 +89,7 @@ Route::get('/items', function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/item-store', [AdminController::class, 'itemstore'])->name('store.item');
+    Route::post('/item-edit', [AdminController::class, 'itemedit'])->name('edit.item');
     Route::post('/stock-in', [AdminController::class, 'stockin'])->name('stockin');
     Route::post('/stock-out', [AdminController::class, 'stockout'])->name('stockout');
     Route::post('/store-purchase-request', [AdminController::class, 'purchaserequest'])->name('purchaserequest');

@@ -3,6 +3,7 @@
 @include('admin.modal.stockin')
 @include('admin.modal.stockout')
 @include('admin.modal.additems')
+@include('admin.modal.edititems')
 @section('content')
 
 
@@ -130,7 +131,7 @@
     <tr>
       <th scope="row">{{$item->unit}}</th>
       <td>{{$item->item_description}}</td>
-      <td>{{$item->balance}}</td>
+      <td style='width:20px;'>{{$item->balance}}</td>
       <td class = "text-center">
 
       <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#detailsmodal"  data-unit='{{$item}}'>
@@ -143,6 +144,10 @@
       <a class = "btn btn-dark  ml-2" style="font-size:12px" data-toggle="modal" data-target="#stockoutmodal" data-list='{{$item}}'>
           <i class="fa fa-send custom-icon text-danger"></i>
     Stock Out</a>
+
+    <a class = "btn btn-dark  ml-2 mt-2" style="font-size:12px" data-toggle="modal" data-target="#edititemsmodal" data-edit='{{$item}}'>
+      <i class="fa-solid fa-pen-to-square text-info"></i>
+    Edit</a>
       
       </td>
     </tr>

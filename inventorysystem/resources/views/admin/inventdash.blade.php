@@ -464,6 +464,37 @@
 <script> 
         
         $(document).ready(function() {
+    $('#agenteditsubmitForm').on('click', function(e) {
+      e.preventDefault(); // Prevent the form from submitting normally
+
+      // Collect the form data
+      var formData = $('#agentedititemForm').serialize();
+
+      // Submit the form data to the server using an AJAX request
+      $.ajax({
+        url: "{{route('edit.item')}}",
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+          console.log('Form submitted successfully');
+          $('#agentedititemForm')[0].reset();
+          $('#edititemsmodal').modal('hide');
+          location.reload();
+          
+        },
+        error: function(xhr, status, error) {
+            var errorObj = JSON.parse(xhr.responseText);
+            alert(errorObj.error);
+        }
+      });
+    });
+ });
+
+</script>
+
+<script> 
+        
+        $(document).ready(function() {
     $('#agentstocksubmitForm').on('click', function(e) {
       e.preventDefault(); // Prevent the form from submitting normally
 
@@ -552,6 +583,38 @@
     });
  });
 
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#edititemsmodal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var item = button.data('edit');
+            document.getElementById('itemid3').setAttribute('value', item.id);
+            document.getElementById('ponumber5').setAttribute('value', item.par_ics);
+            document.getElementById('podate5').setAttribute('value', item.date_acquired);
+            document.getElementById('stockno5').setAttribute('value', item.stock_no);
+            document.getElementById('unit5').setAttribute('value', item.unit);
+            document.getElementById('description5').setAttribute('value', item.item_description);
+            document.getElementById('quantity5').setAttribute('value', item.quantity);
+            document.getElementById('unitcost5').setAttribute('value', item.unit_cost);
+            document.getElementById('remarks5').setAttribute('value', item.status_remarks);
+            document.getElementById('custname5').setAttribute('value', item.custodian_name);
+                    // Set the selected option on the type select element
+            var typeSelect = document.getElementById('type5');
+            var itemType = item.item_type;
+            if (itemType) {
+                var options = typeSelect.options;
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i].value === itemType) {
+                        options[i].selected = true;
+                        break;
+                    }
+                }
+            }
+        
+        });
+    });
 </script>
 
 <script>
